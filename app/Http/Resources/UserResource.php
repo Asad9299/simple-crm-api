@@ -16,7 +16,8 @@ class UserResource extends BaseResource
         return [
             'uuid'  => $this->uuid,
             'name'  => $this->name,
-            'email' => $this->email
+            'email' => $this->email,
+            'authToken' => $this->token
         ];
     }
 }
