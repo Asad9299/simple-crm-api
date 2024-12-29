@@ -16,6 +16,7 @@ class AuthController extends Controller
     {
         $data = $request->validated();
 
+        # Create User
         $user = User::add([
             'uuid'     => Str::uuid(),
             'name'     => $data['name'],
@@ -23,9 +24,11 @@ class AuthController extends Controller
             'password' => $data['password'],
         ]);
 
+        # Generate Sanctum Token
+        $user->token = $user->createToken($data['name'])->plainTextToken;
+
         return (new UserResource($user))->additional([
-            'code'   => 200,
-            'message' => 'User registered successfully'
+            'message' => __('auth.register_success')
         ]);
     }
 }
