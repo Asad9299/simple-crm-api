@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return self::create($data);
     }
+
+    public function assignRole(string $role = '')
+    {
+        $role_id = Role::getRoleId($role);
+
+        RoleUser::create([
+            'user_id' => $this->id,
+            'role_id' => $role_id
+        ]);
+    }
 }

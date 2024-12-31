@@ -12,4 +12,9 @@ class Role extends Model
      * @var list<string>
      */
     protected $fillable = ['name'];
+
+    public static function getRoleId(string $role = '')
+    {
+        return self::where('name', $role)->pluck('id')->first();
+    }
 }
