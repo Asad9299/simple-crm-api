@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,10 @@ class UserController extends Controller
     public function index()
     {
         $users = User::get();
-        return response()->json($users);
+        return UserResource::collection($users)->additional([
+            'message' => 'List of Users',
+            'code'    => 200
+        ]);
     }
 
     /**

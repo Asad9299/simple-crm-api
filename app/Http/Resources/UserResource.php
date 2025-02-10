@@ -14,9 +14,9 @@ class UserResource extends BaseResource
     public function toArray(Request $request): array
     {
         return [
-            'uuid'  => $this->uuid,
-            'name'  => $this->name,
-            'email' => $this->email,
+            'uuid'      => $this->uuid,
+            'name'      => $this->name,
+            'email'     => $this->email,
             'authToken' => $this->token
         ];
     }
