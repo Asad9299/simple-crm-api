@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::get();
+        $users = User::paginate(config('app.pagination.records_per_page'));
         return UserResource::collection($users)->additional([
             'message' => 'List of Users',
             'code'    => 200

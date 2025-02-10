@@ -122,5 +122,8 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+    'pagination' => [
+        'records_per_page' => env('PAGINATION_RECORDS_PER_PAGE', 2),
+    ]
 
 ];
