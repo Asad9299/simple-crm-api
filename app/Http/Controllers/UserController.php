@@ -11,9 +11,14 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(config('app.pagination.records_per_page'));
+        $users = User::when($request->search, function($q) use ($request) {
+            return $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
+        })->paginate(config('app.pagination.records_per_page'));
+
+
         return UserResource::collection($users)->additional([
             'message' => 'List of Users',
             'code'    => 200
