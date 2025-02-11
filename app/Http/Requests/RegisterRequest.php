@@ -33,7 +33,7 @@ class RegisterRequest extends FormRequest
                 'string',
                 'email',
                 'max:255',
-                'unique:' . User::class
+                'unique:' . User::class . ',email,NULL,id,deleted_at,NULL'
             ],
             'password' => [
                 'required',
