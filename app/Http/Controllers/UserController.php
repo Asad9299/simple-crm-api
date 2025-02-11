@@ -11,7 +11,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index( Request $request )
     {
         $users = User::when($request->search, function($q) use ($request) {
             return $q->where('name', 'like', '%' . $request->search . '%')
@@ -74,6 +74,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        return $user->delete();
     }
 }
