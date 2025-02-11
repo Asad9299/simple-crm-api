@@ -16,7 +16,11 @@ class UserController extends Controller
         $users = User::when($request->search, function($q) use ($request) {
             return $q->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('email', 'like', '%' . $request->search . '%');
-        })->paginate(config('app.pagination.records_per_page'));
+        })
+        ->when($request->sort_key, function($q) use ($request) {
+            return $q->orderBy($request->sort_key, $request->sort_order ?? 'DESC');
+        })
+        ->paginate(config('app.pagination.records_per_page'));
 
 
         return UserResource::collection($users)->additional([
